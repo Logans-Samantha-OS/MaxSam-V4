@@ -44,64 +44,121 @@ export default function GrapheneDashboard() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-gray-100 relative overflow-hidden">
-      <svg className="absolute inset-0 w-full h-full opacity-5" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <pattern id="hexagons" x="0" y="0" width="56" height="100" patternUnits="userSpaceOnUse">
-            <polygon points="28,0 56,16 56,50 28,66 0,50 0,16" fill="none" stroke="#00d9ff" strokeWidth="0.5"/>
-            <polygon points="28,66 56,82 56,116 28,132 0,116 0,82" fill="none" stroke="#00d9ff" strokeWidth="0.5"/>
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#hexagons)" />
-      </svg>
+    <>
+      <div style={{
+        minHeight: '100vh',
+        background: '#0a0a0a',
+        color: '#f3f4f6',
+        position: 'relative',
+        overflow: 'hidden',
+        fontFamily: 'system-ui, -apple-system, sans-serif'
+      }}>
+        {/* Hexagon SVG Background */}
+        <svg style={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          opacity: 0.05
+        }} xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="hexagons" x="0" y="0" width="56" height="100" patternUnits="userSpaceOnUse">
+              <polygon points="28,0 56,16 56,50 28,66 0,50 0,16" fill="none" stroke="#00d9ff" strokeWidth="0.5"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#hexagons)" />
+        </svg>
 
-      <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute bottom-0 left-1/3 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        {/* Glow Orbs */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          right: '25%',
+          width: '400px',
+          height: '400px',
+          background: 'rgba(0, 217, 255, 0.1)',
+          borderRadius: '50%',
+          filter: 'blur(80px)',
+          animation: 'pulse 2s ease-in-out infinite'
+        }} />
 
-      <div className="relative z-10 flex h-screen">
-        <div className="w-64 bg-gradient-to-b from-[#1a1a1a] to-[#0f0f0f] border-r border-cyan-500/20 p-6 backdrop-blur-xl flex flex-col">
-          <div className="mb-8">
-            <h1 className="text-2xl font-bold tracking-wider">
-              <span className="text-cyan-400">GRAPHENE</span>
-              <span className="text-gray-400 text-sm block mt-1">Operations System</span>
-            </h1>
-          </div>
+        <div style={{ position: 'relative', zIndex: 10, display: 'flex', height: '100vh' }}>
+          {/* Sidebar */}
+          <div style={{
+            width: '256px',
+            background: 'linear-gradient(to bottom, #1a1a1a, #0f0f0f)',
+            borderRight: '1px solid rgba(0, 217, 255, 0.2)',
+            padding: '24px',
+            display: 'flex',
+            flexDirection: 'column',
+            backdropFilter: 'blur(16px)'
+          }}>
+            <div style={{ marginBottom: '32px' }}>
+              <h1 style={{
+                fontSize: '24px',
+                fontWeight: 'bold',
+                letterSpacing: '0.05em',
+                color: '#00d9ff',
+                marginBottom: '4px'
+              }}>GRAPHENE</h1>
+              <div style={{ color: '#9ca3af', fontSize: '14px' }}>Operations System</div>
+            </div>
 
-          <nav className="space-y-2 flex-1">
-            {[
-              { id: 'dashboard', label: 'Dashboard', icon: '◆' },
-              { id: 'sellers', label: 'Sellers', icon: '◇' },
-              { id: 'buyers', label: 'Buyers', icon: '◈' },
-              { id: 'contracts', label: 'Contracts', icon: '◉' },
-              { id: 'analytics', label: 'Analytics', icon: '◊' }
-            ].map((item) => (
-              <button
-                key={item.id}
-                onClick={() => setCurrentView(item.id as ViewType)}
-                className={`w-full text-left px-4 py-3 rounded-lg transition-all duration-300 flex items-center gap-3 ${
-                  currentView === item.id
-                    ? 'bg-cyan-500/20 border border-cyan-500/50 text-cyan-400 shadow-lg shadow-cyan-500/20'
-                    : 'hover:bg-white/5 text-gray-400 hover:text-cyan-400 border border-transparent'
-                }`}
-              >
-                <span className="text-xl">{item.icon}</span>
-                <span className="font-medium tracking-wide">{item.label}</span>
-              </button>
-            ))}
-          </nav>
+            <nav style={{ flex: 1 }}>
+              {[
+                { id: 'dashboard', label: 'Dashboard', icon: '◆' },
+                { id: 'sellers', label: 'Sellers', icon: '◇' },
+                { id: 'buyers', label: 'Buyers', icon: '◈' },
+                { id: 'contracts', label: 'Contracts', icon: '◉' },
+                { id: 'analytics', label: 'Analytics', icon: '◊' }
+              ].map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => setCurrentView(item.id as ViewType)}
+                  style={{
+                    width: '100%',
+                    textAlign: 'left',
+                    padding: '12px 16px',
+                    borderRadius: '8px',
+                    marginBottom: '8px',
+                    border: currentView === item.id ? '1px solid rgba(0, 217, 255, 0.5)' : '1px solid transparent',
+                    background: currentView === item.id ? 'rgba(0, 217, 255, 0.2)' : 'transparent',
+                    color: currentView === item.id ? '#00d9ff' : '#9ca3af',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '12px',
+                    fontSize: '16px',
+                    transition: 'all 0.3s'
+                  }}
+                >
+                  <span style={{ fontSize: '20px' }}>{item.icon}</span>
+                  <span style={{ fontWeight: 500 }}>{item.label}</span>
+                </button>
+              ))}
+            </nav>
 
-          <div className="mt-auto pt-8">
-            <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-3">
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
-                <span className="text-emerald-400 text-sm font-medium">All Systems Online</span>
+            <div style={{
+              background: 'rgba(16, 185, 129, 0.1)',
+              border: '1px solid rgba(16, 185, 129, 0.3)',
+              borderRadius: '8px',
+              padding: '12px'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <div style={{
+                  width: '8px',
+                  height: '8px',
+                  background: '#10b981',
+                  borderRadius: '50%',
+                  animation: 'pulse 2s ease-in-out infinite'
+                }} />
+                <span style={{ color: '#10b981', fontSize: '14px', fontWeight: 500 }}>All Systems Online</span>
               </div>
             </div>
           </div>
-        </div>
 
-        <div className="flex-1 overflow-auto">
-          <div className="p-8">
+          {/* Main Content */}
+          <div style={{ flex: 1, overflowY: 'auto', padding: '32px' }}>
             {currentView === 'dashboard' && <DashboardView metrics={metrics} />}
             {currentView === 'sellers' && <SellersView sellers={sellers} />}
             {currentView === 'buyers' && <BuyersView buyers={buyers} />}
@@ -110,94 +167,113 @@ export default function GrapheneDashboard() {
           </div>
         </div>
       </div>
-    </div>
+
+      <style jsx global>{`
+        @keyframes pulse {
+          0%, 100% { opacity: 0.1; transform: scale(1); }
+          50% { opacity: 0.2; transform: scale(1.05); }
+        }
+        body { margin: 0; padding: 0; }
+      `}</style>
+    </>
   );
 }
 
 function DashboardView({ metrics }: { metrics: any }) {
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between mb-8">
-        <h2 className="text-4xl font-bold tracking-tight">
-          <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-            Command Center
-          </span>
-        </h2>
-        <div className="text-sm text-gray-500 flex items-center gap-2">
-          <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+    <div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
+        <h2 style={{
+          fontSize: '36px',
+          fontWeight: 'bold',
+          background: 'linear-gradient(to right, #00d9ff, #0080ff)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent'
+        }}>Command Center</h2>
+        <div style={{ fontSize: '14px', color: '#6b7280', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div style={{ width: '8px', height: '8px', background: '#10b981', borderRadius: '50%', animation: 'pulse 2s ease-in-out infinite' }} />
           Real-time Operations
         </div>
       </div>
 
-      <div className="grid grid-cols-4 gap-6">
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px', marginBottom: '32px' }}>
         {[
-          { label: 'Total Leads', value: metrics.totalLeads, icon: '▲', color: 'cyan' },
-          { label: 'Active Deals', value: metrics.activeDeals, icon: '●', color: 'blue' },
-          { label: 'Conversion Rate', value: `${metrics.conversionRate.toFixed(1)}%`, icon: '↗', color: 'emerald' },
-          { label: 'Total Revenue', value: `$${(metrics.totalRevenue / 1000).toFixed(0)}K`, icon: '◆', color: 'purple' }
+          { label: 'Total Leads', value: metrics.totalLeads, icon: '▲', color: '#00d9ff' },
+          { label: 'Active Deals', value: metrics.activeDeals, icon: '●', color: '#0080ff' },
+          { label: 'Conversion', value: `${metrics.conversionRate.toFixed(1)}%`, icon: '↗', color: '#10b981' },
+          { label: 'Revenue', value: `$${(metrics.totalRevenue / 1000).toFixed(0)}K`, icon: '◆', color: '#a855f7' }
         ].map((metric, idx) => (
-          <div
-            key={idx}
-            className="bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-cyan-500/20 rounded-xl p-6 backdrop-blur-xl hover:border-cyan-500/40 transition-all duration-300"
-          >
-            <div className="flex items-center justify-between mb-4">
-              <span className={`text-3xl text-${metric.color}-400`}>{metric.icon}</span>
-              <div className={`w-12 h-12 rounded-full bg-${metric.color}-500/10 flex items-center justify-center`}>
-                <div className={`w-6 h-6 rounded-full bg-${metric.color}-500/20`} />
-              </div>
-            </div>
-            <div className={`text-3xl font-bold text-${metric.color}-400 mb-2`}>{metric.value}</div>
-            <div className="text-gray-500 text-sm uppercase tracking-wider">{metric.label}</div>
+          <div key={idx} style={{
+            background: 'linear-gradient(135deg, #1a1a1a, #0f0f0f)',
+            border: '1px solid rgba(0, 217, 255, 0.2)',
+            borderRadius: '12px',
+            padding: '24px',
+            backdropFilter: 'blur(16px)'
+          }}>
+            <div style={{ fontSize: '32px', color: metric.color, marginBottom: '12px' }}>{metric.icon}</div>
+            <div style={{ fontSize: '32px', fontWeight: 'bold', color: metric.color, marginBottom: '8px' }}>{metric.value}</div>
+            <div style={{ fontSize: '12px', color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{metric.label}</div>
           </div>
         ))}
       </div>
 
-      <div className="grid grid-cols-2 gap-6 mt-8">
-        <div className="bg-[#1a1a1a]/50 border border-cyan-500/20 rounded-xl p-6 backdrop-blur-xl">
-          <h3 className="text-xl font-bold text-cyan-400 mb-4">Recent Activity</h3>
-          <div className="space-y-3">
-            {[
-              { time: '2m ago', action: 'New lead scored', score: '87/100' },
-              { time: '15m ago', action: 'Contract signed', value: '$45K' },
-              { time: '1h ago', action: 'SMS sent to seller', status: 'Delivered' },
-              { time: '2h ago', action: 'Eleanor analyzed doc', result: 'Approved' }
-            ].map((activity, idx) => (
-              <div key={idx} className="flex items-center justify-between py-2 border-b border-gray-800 last:border-0">
-                <div>
-                  <div className="text-gray-300 text-sm">{activity.action}</div>
-                  <div className="text-gray-600 text-xs">{activity.time}</div>
-                </div>
-                <div className="text-cyan-400 text-sm font-mono">
-                  {activity.score || activity.value || activity.status || activity.result}
-                </div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '24px' }}>
+        <div style={{
+          background: 'rgba(26, 26, 26, 0.5)',
+          border: '1px solid rgba(0, 217, 255, 0.2)',
+          borderRadius: '12px',
+          padding: '24px',
+          backdropFilter: 'blur(16px)'
+        }}>
+          <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#00d9ff', marginBottom: '16px' }}>Recent Activity</h3>
+          {[
+            { time: '2m ago', action: 'New lead scored', value: '87/100' },
+            { time: '15m ago', action: 'Contract signed', value: '$45K' },
+            { time: '1h ago', action: 'SMS sent', value: 'Delivered' }
+          ].map((activity, idx) => (
+            <div key={idx} style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              padding: '12px 0',
+              borderBottom: idx < 2 ? '1px solid #374151' : 'none'
+            }}>
+              <div>
+                <div style={{ color: '#d1d5db', fontSize: '14px' }}>{activity.action}</div>
+                <div style={{ color: '#6b7280', fontSize: '12px' }}>{activity.time}</div>
               </div>
-            ))}
-          </div>
+              <div style={{ color: '#00d9ff', fontSize: '14px', fontFamily: 'monospace' }}>{activity.value}</div>
+            </div>
+          ))}
         </div>
 
-        <div className="bg-[#1a1a1a]/50 border border-cyan-500/20 rounded-xl p-6 backdrop-blur-xl">
-          <h3 className="text-xl font-bold text-cyan-400 mb-4">AI Agent Status</h3>
-          <div className="space-y-4">
-            {[
-              { name: 'Sam', status: 'Processing 3 leads', load: 45 },
-              { name: 'Eleanor', status: 'Analyzing contracts', load: 78 },
-              { name: 'Alex (NanoBanana)', status: 'Idle', load: 12 },
-              { name: 'Automation Engine', status: 'Running', load: 34 }
-            ].map((agent, idx) => (
-              <div key={idx}>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-gray-300 font-medium">{agent.name}</span>
-                  <span className="text-gray-500 text-sm">{agent.status}</span>
-                </div>
-                <div className="w-full bg-gray-800 rounded-full h-2">
-                  <div
-                    className="bg-gradient-to-r from-cyan-500 to-blue-500 h-2 rounded-full transition-all duration-500"
-                    style={{ width: `${agent.load}%` }}
-                  />
-                </div>
+        <div style={{
+          background: 'rgba(26, 26, 26, 0.5)',
+          border: '1px solid rgba(0, 217, 255, 0.2)',
+          borderRadius: '12px',
+          padding: '24px',
+          backdropFilter: 'blur(16px)'
+        }}>
+          <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#00d9ff', marginBottom: '16px' }}>AI Agents</h3>
+          {[
+            { name: 'Sam', status: 'Processing leads', load: 45 },
+            { name: 'Eleanor', status: 'Analyzing docs', load: 78 },
+            { name: 'Alex', status: 'Idle', load: 12 }
+          ].map((agent, idx) => (
+            <div key={idx} style={{ marginBottom: '16px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                <span style={{ color: '#d1d5db', fontWeight: 500 }}>{agent.name}</span>
+                <span style={{ color: '#6b7280', fontSize: '14px' }}>{agent.status}</span>
               </div>
-            ))}
-          </div>
+              <div style={{ width: '100%', height: '8px', background: '#374151', borderRadius: '4px', overflow: 'hidden' }}>
+                <div style={{
+                  width: `${agent.load}%`,
+                  height: '100%',
+                  background: 'linear-gradient(to right, #00d9ff, #0080ff)',
+                  transition: 'width 0.5s'
+                }} />
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
@@ -206,50 +282,59 @@ function DashboardView({ metrics }: { metrics: any }) {
 
 function SellersView({ sellers }: { sellers: any[] }) {
   return (
-    <div className="space-y-6">
-      <h2 className="text-4xl font-bold tracking-tight">
-        <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-          Seller Pipeline
-        </span>
-      </h2>
-
-      <div className="bg-[#1a1a1a]/50 border border-cyan-500/20 rounded-xl overflow-hidden backdrop-blur-xl">
-        <table className="w-full">
-          <thead className="bg-cyan-500/10 border-b border-cyan-500/20">
+    <div>
+      <h2 style={{
+        fontSize: '36px',
+        fontWeight: 'bold',
+        background: 'linear-gradient(to right, #00d9ff, #0080ff)',
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
+        marginBottom: '24px'
+      }}>Seller Pipeline</h2>
+      
+      <div style={{
+        background: 'rgba(26, 26, 26, 0.5)',
+        border: '1px solid rgba(0, 217, 255, 0.2)',
+        borderRadius: '12px',
+        overflow: 'hidden'
+      }}>
+        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+          <thead style={{ background: 'rgba(0, 217, 255, 0.1)', borderBottom: '1px solid rgba(0, 217, 255, 0.2)' }}>
             <tr>
-              <th className="px-6 py-4 text-left text-cyan-400 font-semibold text-sm uppercase tracking-wider">Property</th>
-              <th className="px-6 py-4 text-left text-cyan-400 font-semibold text-sm uppercase tracking-wider">Owner</th>
-              <th className="px-6 py-4 text-left text-cyan-400 font-semibold text-sm uppercase tracking-wider">Score</th>
-              <th className="px-6 py-4 text-left text-cyan-400 font-semibold text-sm uppercase tracking-wider">Status</th>
-              <th className="px-6 py-4 text-left text-cyan-400 font-semibold text-sm uppercase tracking-wider">Action</th>
+              <th style={{ padding: '16px 24px', textAlign: 'left', color: '#00d9ff', fontSize: '12px', textTransform: 'uppercase' }}>Property</th>
+              <th style={{ padding: '16px 24px', textAlign: 'left', color: '#00d9ff', fontSize: '12px', textTransform: 'uppercase' }}>Owner</th>
+              <th style={{ padding: '16px 24px', textAlign: 'left', color: '#00d9ff', fontSize: '12px', textTransform: 'uppercase' }}>Score</th>
+              <th style={{ padding: '16px 24px', textAlign: 'left', color: '#00d9ff', fontSize: '12px', textTransform: 'uppercase' }}>Status</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-800">
+          <tbody>
             {sellers.length > 0 ? sellers.map((seller, idx) => (
-              <tr key={idx} className="hover:bg-cyan-500/5 transition-colors">
-                <td className="px-6 py-4 text-gray-300">{seller.property_address || 'N/A'}</td>
-                <td className="px-6 py-4 text-gray-400">{seller.owner_name || 'Unknown'}</td>
-                <td className="px-6 py-4">
-                  <span className="inline-flex items-center px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-400 text-sm font-mono">
-                    {seller.score || 0}/100
-                  </span>
+              <tr key={idx} style={{ borderBottom: '1px solid #374151' }}>
+                <td style={{ padding: '16px 24px', color: '#d1d5db' }}>{seller.property_address || 'N/A'}</td>
+                <td style={{ padding: '16px 24px', color: '#9ca3af' }}>{seller.owner_name || 'Unknown'}</td>
+                <td style={{ padding: '16px 24px' }}>
+                  <span style={{
+                    padding: '4px 12px',
+                    background: 'rgba(0, 217, 255, 0.2)',
+                    color: '#00d9ff',
+                    borderRadius: '12px',
+                    fontSize: '14px',
+                    fontFamily: 'monospace'
+                  }}>{seller.score || 0}/100</span>
                 </td>
-                <td className="px-6 py-4">
-                  <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${
-                    seller.status === 'contacted' ? 'bg-blue-500/20 text-blue-400' : 
-                    seller.status === 'qualified' ? 'bg-emerald-500/20 text-emerald-400' :
-                    'bg-gray-500/20 text-gray-400'
-                  }`}>
-                    {seller.status || 'new'}
-                  </span>
-                </td>
-                <td className="px-6 py-4">
-                  <button className="text-cyan-400 hover:text-cyan-300 text-sm font-medium">View →</button>
+                <td style={{ padding: '16px 24px' }}>
+                  <span style={{
+                    padding: '4px 12px',
+                    background: seller.status === 'qualified' ? 'rgba(16, 185, 129, 0.2)' : 'rgba(107, 114, 128, 0.2)',
+                    color: seller.status === 'qualified' ? '#10b981' : '#9ca3af',
+                    borderRadius: '12px',
+                    fontSize: '12px'
+                  }}>{seller.status || 'new'}</span>
                 </td>
               </tr>
             )) : (
               <tr>
-                <td colSpan={5} className="px-6 py-8 text-center text-gray-500">
+                <td colSpan={4} style={{ padding: '32px', textAlign: 'center', color: '#6b7280' }}>
                   No sellers found. Connect your data source.
                 </td>
               </tr>
@@ -263,40 +348,52 @@ function SellersView({ sellers }: { sellers: any[] }) {
 
 function BuyersView({ buyers }: { buyers: any[] }) {
   return (
-    <div className="space-y-6">
-      <h2 className="text-4xl font-bold tracking-tight">
-        <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-          Active Buyers
-        </span>
-      </h2>
+    <div>
+      <h2 style={{
+        fontSize: '36px',
+        fontWeight: 'bold',
+        background: 'linear-gradient(to right, #00d9ff, #0080ff)',
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
+        marginBottom: '24px'
+      }}>Active Buyers</h2>
 
-      <div className="grid grid-cols-3 gap-6">
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
         {buyers.length > 0 ? buyers.map((buyer, idx) => (
-          <div
-            key={idx}
-            className="bg-gradient-to-br from-[#1a1a1a] to-[#0f0f0f] border border-cyan-500/20 rounded-xl p-6 hover:border-cyan-500/40 transition-all duration-300 backdrop-blur-xl"
-          >
-            <div className="flex items-center justify-between mb-4">
-              <div className="w-12 h-12 rounded-full bg-cyan-500/20 flex items-center justify-center text-cyan-400 font-bold text-xl">
-                {(buyer.name || 'U')[0].toUpperCase()}
+          <div key={idx} style={{
+            background: 'linear-gradient(135deg, #1a1a1a, #0f0f0f)',
+            border: '1px solid rgba(0, 217, 255, 0.2)',
+            borderRadius: '12px',
+            padding: '24px'
+          }}>
+            <div style={{
+              width: '48px',
+              height: '48px',
+              background: 'rgba(0, 217, 255, 0.2)',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#00d9ff',
+              fontSize: '24px',
+              fontWeight: 'bold',
+              marginBottom: '16px'
+            }}>{(buyer.name || 'U')[0].toUpperCase()}</div>
+            <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#e5e7eb', marginBottom: '12px' }}>{buyer.name || 'Unknown'}</h3>
+            <div style={{ fontSize: '14px', color: '#6b7280' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                <span>Budget:</span>
+                <span style={{ color: '#00d9ff', fontFamily: 'monospace' }}>${buyer.budget || 0}K</span>
               </div>
-              <span className="text-emerald-400 text-xs font-semibold">ACTIVE</span>
-            </div>
-            <h3 className="text-lg font-bold text-gray-200 mb-2">{buyer.name || 'Unknown Buyer'}</h3>
-            <div className="space-y-2 text-sm">
-              <div className="flex justify-between">
-                <span className="text-gray-500">Budget:</span>
-                <span className="text-cyan-400 font-mono">${buyer.budget || 0}K</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-500">Deals:</span>
-                <span className="text-gray-300">{buyer.deals_count || 0}</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span>Deals:</span>
+                <span style={{ color: '#d1d5db' }}>{buyer.deals_count || 0}</span>
               </div>
             </div>
           </div>
         )) : (
-          <div className="col-span-3 text-center py-12 text-gray-500">
-            No active buyers. Start building your buyer list.
+          <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '48px', color: '#6b7280' }}>
+            No active buyers.
           </div>
         )}
       </div>
@@ -306,28 +403,40 @@ function BuyersView({ buyers }: { buyers: any[] }) {
 
 function ContractsView({ contracts }: { contracts: any[] }) {
   return (
-    <div className="space-y-6">
-      <h2 className="text-4xl font-bold tracking-tight">
-        <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-          Contract Pipeline
-        </span>
-      </h2>
+    <div>
+      <h2 style={{
+        fontSize: '36px',
+        fontWeight: 'bold',
+        background: 'linear-gradient(to right, #00d9ff, #0080ff)',
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
+        marginBottom: '24px'
+      }}>Contract Pipeline</h2>
 
-      <div className="grid grid-cols-4 gap-6">
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px' }}>
         {['Draft', 'Sent', 'Signed', 'Closed'].map((stage) => (
-          <div key={stage} className="bg-[#1a1a1a]/50 border border-cyan-500/20 rounded-xl p-4 backdrop-blur-xl">
-            <h3 className="text-cyan-400 font-bold mb-4 uppercase text-sm tracking-wider">{stage}</h3>
-            <div className="space-y-3">
-              {contracts.filter((c: any) => c.status?.toLowerCase() === stage.toLowerCase()).map((contract, idx) => (
-                <div key={idx} className="bg-[#0f0f0f] border border-gray-800 rounded-lg p-3 hover:border-cyan-500/30 transition-colors cursor-pointer">
-                  <div className="text-gray-300 font-medium text-sm mb-1">{contract.property_address || 'Property'}</div>
-                  <div className="text-cyan-400 font-mono text-xs">${contract.amount || 0}</div>
-                </div>
-              ))}
-              {contracts.filter((c: any) => c.status?.toLowerCase() === stage.toLowerCase()).length === 0 && (
-                <div className="text-gray-600 text-xs text-center py-4">No contracts</div>
-              )}
-            </div>
+          <div key={stage} style={{
+            background: 'rgba(26, 26, 26, 0.5)',
+            border: '1px solid rgba(0, 217, 255, 0.2)',
+            borderRadius: '12px',
+            padding: '16px'
+          }}>
+            <h3 style={{ color: '#00d9ff', fontWeight: 'bold', marginBottom: '16px', textTransform: 'uppercase', fontSize: '14px' }}>{stage}</h3>
+            {contracts.filter(c => c.status?.toLowerCase() === stage.toLowerCase()).map((contract, idx) => (
+              <div key={idx} style={{
+                background: '#0f0f0f',
+                border: '1px solid #374151',
+                borderRadius: '8px',
+                padding: '12px',
+                marginBottom: '12px'
+              }}>
+                <div style={{ color: '#d1d5db', fontSize: '14px', marginBottom: '4px' }}>{contract.property_address || 'Property'}</div>
+                <div style={{ color: '#00d9ff', fontSize: '12px', fontFamily: 'monospace' }}>${contract.amount || 0}</div>
+              </div>
+            ))}
+            {contracts.filter(c => c.status?.toLowerCase() === stage.toLowerCase()).length === 0 && (
+              <div style={{ textAlign: 'center', padding: '16px', color: '#6b7280', fontSize: '12px' }}>No contracts</div>
+            )}
           </div>
         ))}
       </div>
@@ -337,57 +446,74 @@ function ContractsView({ contracts }: { contracts: any[] }) {
 
 function AnalyticsView() {
   return (
-    <div className="space-y-6">
-      <h2 className="text-4xl font-bold tracking-tight">
-        <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-          Performance Analytics
-        </span>
-      </h2>
+    <div>
+      <h2 style={{
+        fontSize: '36px',
+        fontWeight: 'bold',
+        background: 'linear-gradient(to right, #00d9ff, #0080ff)',
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
+        marginBottom: '24px'
+      }}>Performance Analytics</h2>
 
-      <div className="grid grid-cols-2 gap-6">
-        <div className="bg-[#1a1a1a]/50 border border-cyan-500/20 rounded-xl p-6 backdrop-blur-xl">
-          <h3 className="text-xl font-bold text-cyan-400 mb-4">Lead Conversion Funnel</h3>
-          <div className="space-y-4">
-            {[
-              { stage: 'Total Leads', count: 150, percentage: 100 },
-              { stage: 'Contacted', count: 120, percentage: 80 },
-              { stage: 'Qualified', count: 75, percentage: 50 },
-              { stage: 'Under Contract', count: 30, percentage: 20 },
-              { stage: 'Closed', count: 15, percentage: 10 }
-            ].map((item, idx) => (
-              <div key={idx}>
-                <div className="flex justify-between mb-2">
-                  <span className="text-gray-300">{item.stage}</span>
-                  <span className="text-cyan-400 font-mono">{item.count}</span>
-                </div>
-                <div className="w-full bg-gray-800 rounded-full h-3">
-                  <div
-                    className="bg-gradient-to-r from-cyan-500 to-blue-500 h-3 rounded-full"
-                    style={{ width: `${item.percentage}%` }}
-                  />
-                </div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '24px' }}>
+        <div style={{
+          background: 'rgba(26, 26, 26, 0.5)',
+          border: '1px solid rgba(0, 217, 255, 0.2)',
+          borderRadius: '12px',
+          padding: '24px'
+        }}>
+          <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#00d9ff', marginBottom: '16px' }}>Conversion Funnel</h3>
+          {[
+            { stage: 'Leads', count: 150, pct: 100 },
+            { stage: 'Contacted', count: 120, pct: 80 },
+            { stage: 'Qualified', count: 75, pct: 50 },
+            { stage: 'Closed', count: 15, pct: 10 }
+          ].map((item, idx) => (
+            <div key={idx} style={{ marginBottom: '16px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                <span style={{ color: '#d1d5db' }}>{item.stage}</span>
+                <span style={{ color: '#00d9ff', fontFamily: 'monospace' }}>{item.count}</span>
               </div>
-            ))}
-          </div>
+              <div style={{ width: '100%', height: '12px', background: '#374151', borderRadius: '6px', overflow: 'hidden' }}>
+                <div style={{
+                  width: `${item.pct}%`,
+                  height: '100%',
+                  background: 'linear-gradient(to right, #00d9ff, #0080ff)'
+                }} />
+              </div>
+            </div>
+          ))}
         </div>
 
-        <div className="bg-[#1a1a1a]/50 border border-cyan-500/20 rounded-xl p-6 backdrop-blur-xl">
-          <h3 className="text-xl font-bold text-cyan-400 mb-4">Monthly Performance</h3>
-          <div className="space-y-4">
-            {['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'].map((month, idx) => (
-              <div key={idx} className="flex items-center gap-4">
-                <span className="text-gray-500 w-12">{month}</span>
-                <div className="flex-1 bg-gray-800 rounded-full h-8">
-                  <div
-                    className="bg-gradient-to-r from-emerald-500 to-cyan-500 h-8 rounded-full flex items-center justify-end pr-3"
-                    style={{ width: `${Math.random() * 60 + 40}%` }}
-                  >
-                    <span className="text-white text-xs font-bold">${Math.floor(Math.random() * 50 + 20)}K</span>
+        <div style={{
+          background: 'rgba(26, 26, 26, 0.5)',
+          border: '1px solid rgba(0, 217, 255, 0.2)',
+          borderRadius: '12px',
+          padding: '24px'
+        }}>
+          <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#00d9ff', marginBottom: '16px' }}>Monthly Revenue</h3>
+          {['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'].map((month, idx) => {
+            const revenue = Math.floor(Math.random() * 50 + 20);
+            return (
+              <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '16px' }}>
+                <span style={{ color: '#6b7280', width: '48px' }}>{month}</span>
+                <div style={{ flex: 1, height: '32px', background: '#374151', borderRadius: '4px', overflow: 'hidden' }}>
+                  <div style={{
+                    width: `${(revenue / 70) * 100}%`,
+                    height: '100%',
+                    background: 'linear-gradient(to right, #10b981, #00d9ff)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'flex-end',
+                    paddingRight: '12px'
+                  }}>
+                    <span style={{ color: '#fff', fontSize: '12px', fontWeight: 'bold' }}>${revenue}K</span>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
+            );
+          })}
         </div>
       </div>
     </div>
