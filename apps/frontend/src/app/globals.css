@@ -1,3 +1,18 @@
-git add .
-git commit -m "Empty globals.css test"
-git push origin main
+body {
+  background-color: #0a0a0a;
+  color: #f3f4f6;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00d9ff;
+  border-radius: 4px;
+}
