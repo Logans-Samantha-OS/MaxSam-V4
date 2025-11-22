@@ -1,0 +1,30 @@
+{
+  "name": "maxsam-v4",
+  "version": "1.0.0",
+  "private": true,
+  "description": "MaxSam V4 - AI-Powered Real Estate Operations Platform",
+  "workspaces": [
+    "apps/*",
+    "agents",
+    "pipelines"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "deploy": "tsx scripts/deploy.ts",
+    "ingest": "tsx scripts/ingest.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "turbo": "^1.11.0",
+    "typescript": "^5.3.0",
+    "tsx": "^4.7.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}

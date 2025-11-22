@@ -1,0 +1,77 @@
+[
+  {
+    "address": "123 Main Street",
+    "city": "Dallas",
+    "state": "TX",
+    "zip": "75001",
+    "county": "Dallas",
+    "latitude": 32.7767,
+    "longitude": -96.7970,
+    "owner_name": "John Smith",
+    "owner_phone": "+14695551234",
+    "assessed_value": 250000,
+    "market_value": 320000,
+    "equity": 180000,
+    "score": 85,
+    "status": "active",
+    "metadata": {
+      "property_type": "Single Family",
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "square_feet": 1800,
+      "year_built": 1995,
+      "last_sale_date": "2015-06-15",
+      "last_sale_price": 215000
+    }
+  },
+  {
+    "address": "456 Oak Avenue",
+    "city": "Houston",
+    "state": "TX",
+    "zip": "77001",
+    "county": "Harris",
+    "latitude": 29.7604,
+    "longitude": -95.3698,
+    "owner_name": "Jane Doe",
+    "owner_phone": "+17135559876",
+    "assessed_value": 180000,
+    "market_value": 210000,
+    "equity": 95000,
+    "score": 72,
+    "status": "active",
+    "metadata": {
+      "property_type": "Townhouse",
+      "bedrooms": 2,
+      "bathrooms": 2,
+      "square_feet": 1400,
+      "year_built": 2005,
+      "last_sale_date": "2018-03-22",
+      "last_sale_price": 175000
+    }
+  },
+  {
+    "address": "789 Pine Lane",
+    "city": "Austin",
+    "state": "TX",
+    "zip": "78701",
+    "county": "Travis",
+    "latitude": 30.2672,
+    "longitude": -97.7431,
+    "owner_name": "Bob Johnson",
+    "owner_phone": "+15125554321",
+    "assessed_value": 450000,
+    "market_value": 550000,
+    "equity": 380000,
+    "score": 91,
+    "status": "active",
+    "metadata": {
+      "property_type": "Single Family",
+      "bedrooms": 4,
+      "bathrooms": 3,
+      "square_feet": 2600,
+      "year_built": 2010,
+      "last_sale_date": "2019-11-08",
+      "last_sale_price": 420000
+    }
+  }
+]

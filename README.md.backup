@@ -1,0 +1,109 @@
+# MaxSam-V4
+
+AI-Powered Real Estate Operations Platform
+
+## 🏗️ Architecture
+
+MaxSam-V4 is a modern monorepo built with:
+
+- **Backend**: Node.js / Next.js API Routes
+- **Frontend**: Next.js 14 (App Router)
+- **Database**: Supabase (PostgreSQL)
+- **Automation**: n8n workflows
+- **Deployment**: Vercel
+- **AI Agents**: Sam, Eleanor, Alex, NanoBanana
+
+## 📦 Monorepo Structure
+
+```
+MaxSam-V4/
+├── apps/
+│   ├── backend/        # API routes, services, business logic
+│   └── frontend/       # Next.js application
+├── agents/             # AI agent definitions (Sam, Eleanor, Alex, NanoBanana)
+├── pipelines/          # Data processing pipelines
+├── infra/              # Infrastructure configuration
+│   ├── supabase/      # Database schema & migrations
+│   ├── n8n/           # Workflow exports
+│   ├── docusign/      # DocuSign integration
+│   ├── twilio/        # Twilio SMS/Voice
+│   ├── zillow/        # Property data
+│   └── rtdata/        # Real-time data sources
+├── tests/              # Test files and sample data
+├── scripts/            # Deployment and utility scripts
+└── docs/               # Documentation
+```
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- npm 9+
+- Supabase account
+- Vercel account (for deployment)
+
+### Installation
+
+```bash
+npm install
+```
+
+### Development
+
+```bash
+npm run dev
+```
+
+### Build
+
+```bash
+npm run build
+```
+
+### Deploy
+
+```bash
+npm run deploy
+```
+
+## 🤖 AI Agents
+
+- **Sam**: Main emotional + reasoning companion
+- **Eleanor**: Analytics, business logic, operations
+- **Alex**: Creative engine (writing, branding, multimedia)
+- **NanoBanana**: Technical + JSON + workflow builder
+
+## 🔧 Tech Stack
+
+- **TypeScript**: Strict mode, schema-first
+- **Supabase**: PostgreSQL with RLS
+- **n8n**: Workflow automation
+- **Vercel**: Edge deployment
+- **Turborepo**: Monorepo build system
+
+## 📝 Environment Setup
+
+Copy `.env.example` to `.env` and configure your credentials:
+
+```bash
+cp .env.example .env
+```
+
+## 🧪 Testing
+
+```bash
+npm run test
+```
+
+## 📚 Documentation
+
+See `/docs` folder for detailed documentation.
+
+## 🤝 Contributing
+
+This is a private repository. Contact the maintainer for access.
+
+## 📄 License
+
+Private - All Rights Reserved

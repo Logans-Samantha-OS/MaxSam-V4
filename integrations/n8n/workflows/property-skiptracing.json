@@ -1,0 +1,120 @@
+{
+  "name": "Property Skiptracing Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "skiptrace",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "webhookId": "maxsam-skiptrace"
+    },
+    {
+      "parameters": {
+        "url": "={{$env.BACKEND_URL}}/api/properties/{{$json.propertyId}}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "id": "fetch-property",
+      "name": "Fetch Property Data",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "url": "={{$env.RTDATA_API_URL}}/skiptrace",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "address",
+              "value": "={{$json.address}}"
+            },
+            {
+              "name": "city",
+              "value": "={{$json.city}}"
+            },
+            {
+              "name": "state",
+              "value": "={{$json.state}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "run-skiptrace",
+      "name": "Run Skiptracing API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "properties",
+        "filterType": "manual",
+        "matchValues": {
+          "id": "={{$json.propertyId}}"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "owner_phone": "={{$json.phone}}",
+            "owner_email": "={{$json.email}}",
+            "metadata": "={{$json.skiptraceData}}"
+          }
+        },
+        "options": {}
+      },
+      "id": "update-property",
+      "name": "Update Property in Supabase",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [850, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { success: true, propertyId: $json.propertyId, phone: $json.owner_phone } }}"
+      },
+      "id": "respond",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1050, 300]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [[{ "node": "Fetch Property Data", "type": "main", "index": 0 }]]
+    },
+    "Fetch Property Data": {
+      "main": [[{ "node": "Run Skiptracing API", "type": "main", "index": 0 }]]
+    },
+    "Run Skiptracing API": {
+      "main": [[{ "node": "Update Property in Supabase", "type": "main", "index": 0 }]]
+    },
+    "Update Property in Supabase": {
+      "main": [[{ "node": "Respond to Webhook", "type": "main", "index": 0 }]]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2024-11-20T00:00:00.000Z",
+  "versionId": "1"
+}

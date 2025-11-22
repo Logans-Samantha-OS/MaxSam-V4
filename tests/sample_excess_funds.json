@@ -1,0 +1,59 @@
+[
+  {
+    "case_number": "FC-2023-001234",
+    "property_address": "123 Main Street, Dallas, TX 75001",
+    "county": "Dallas",
+    "state": "TX",
+    "foreclosure_date": "2023-06-15",
+    "sale_amount": 320000,
+    "debt_amount": 180000,
+    "excess_funds": 140000,
+    "former_owner": "John Smith",
+    "status": "unclaimed",
+    "deadline": "2024-06-15",
+    "metadata": {
+      "case_type": "Tax Foreclosure",
+      "court": "Dallas County Court",
+      "sale_type": "Sheriff Sale",
+      "winning_bidder": "XYZ Investment LLC"
+    }
+  },
+  {
+    "case_number": "FC-2023-002567",
+    "property_address": "456 Oak Avenue, Houston, TX 77001",
+    "county": "Harris",
+    "state": "TX",
+    "foreclosure_date": "2023-08-22",
+    "sale_amount": 210000,
+    "debt_amount": 145000,
+    "excess_funds": 65000,
+    "former_owner": "Jane Doe",
+    "status": "unclaimed",
+    "deadline": "2024-08-22",
+    "metadata": {
+      "case_type": "Mortgage Foreclosure",
+      "court": "Harris County Court",
+      "sale_type": "Trustee Sale",
+      "winning_bidder": "ABC Realty Partners"
+    }
+  },
+  {
+    "case_number": "FC-2023-003891",
+    "property_address": "789 Pine Lane, Austin, TX 78701",
+    "county": "Travis",
+    "state": "TX",
+    "foreclosure_date": "2023-09-10",
+    "sale_amount": 550000,
+    "debt_amount": 290000,
+    "excess_funds": 260000,
+    "former_owner": "Bob Johnson",
+    "status": "unclaimed",
+    "deadline": "2024-09-10",
+    "metadata": {
+      "case_type": "Tax Foreclosure",
+      "court": "Travis County Court",
+      "sale_type": "Commissioner Sale",
+      "winning_bidder": "DEF Capital Group"
+    }
+  }
+]
