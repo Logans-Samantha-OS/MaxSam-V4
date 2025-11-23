@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* demo styles so you can visually confirm Tailwind is working */
+html, body { min-height: 100%; }
+body { background: #0a0a0a; color: #e5e7eb; }
+.bg-gradient-cyan-blue { background: linear-gradient(90deg,#06b6d4,#3b82f6); }
